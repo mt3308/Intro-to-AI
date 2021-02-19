@@ -5,7 +5,7 @@ from collections import deque
 
 import sys
 import math
-from resource import *
+import resource
 import time
 import queue as Q
 import heapq
