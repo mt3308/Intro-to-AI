@@ -8,7 +8,6 @@ import math
 import resource
 import time
 import queue as Q
-import heapq
 
 class Frontier:
     def __init__(self, initial_state):
