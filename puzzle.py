@@ -5,7 +5,7 @@ from collections import deque
 
 import sys
 import math
-#import resource
+import resource
 import time
 import queue as Q
 import heapq
@@ -229,7 +229,7 @@ def bfs_search(initial_state):
     n=0 #nodes_expanded
     m=0
     s  = time.time()
-    #s_m = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    s_m = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     while (frontier.isEmpty() == 0):
         state = frontier.dequeue()
         if (state.cost > m):
@@ -250,7 +250,7 @@ def bfs_search(initial_state):
         
         n += 1
     
-    #print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss - s_m)
+    print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss - s_m)
     r = time.time()
         
     return 0
