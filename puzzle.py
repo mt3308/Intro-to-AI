@@ -5,7 +5,7 @@ from collections import deque
 
 import sys
 import math
-import resource
+from resource input *
 import time
 import queue as Q
 import heapq
@@ -198,7 +198,7 @@ class PuzzleState(object):
 # Function that Writes to output.txt
 
 ### Students need to change the method to have the corresponding parameters
-def writeOutput(initial_state, final_state, n, m, c, r):
+def writeOutput(initial_state, final_state, n, m, c, r, s):
     ### Student Code Goes here
     f= open("output.txt", "w")
     
@@ -211,7 +211,7 @@ def writeOutput(initial_state, final_state, n, m, c, r):
         current = current.parent
         search_depth += 1
     
-    f.write("path_to_goal: {}\ncost_of_path: {}\nnodes_expanded: {}\nsearch_depth: {}\nmax_search_depth: {}\nrunning_time: {}".format(path_to_goal, c, n, search_depth, m, round(r, 8)))
+    f.write("path_to_goal: {}\ncost_of_path: {}\nnodes_expanded: {}\nsearch_depth: {}\nmax_search_depth: {}\nrunning_time: {}\n {}".format(path_to_goal, c, n, search_depth, m, round(r, 8), s))
     
     
     f.close()
@@ -239,7 +239,8 @@ def bfs_search(initial_state):
         if test_goal(state):
             l = frontier.len
             r = time.time() - s
-            writeOutput(initial_state, state, n, state.cost + l, state.cost, r)
+            sp = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss - s_m
+            writeOutput(initial_state, state, n, state.cost + l, state.cost, r, sp)
             return 1
         
         neighbors = state.expand()
@@ -250,7 +251,7 @@ def bfs_search(initial_state):
         
         n += 1
     
-    print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss - s_m)
+    
     r = time.time()
         
     return 0
