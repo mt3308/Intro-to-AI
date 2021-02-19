@@ -211,7 +211,7 @@ def writeOutput(initial_state, final_state, n, m, c, r, s):
         current = current.parent
         search_depth += 1
     
-    f.write("path_to_goal: {}\ncost_of_path: {}\nnodes_expanded: {}\nsearch_depth: {}\nmax_search_depth: {}\nrunning_time: {}\nmax_Ram_usage:{}".format(path_to_goal, c, n, search_depth, m, round(r, 8), round(s, 8))
+    f.write("path_to_goal: {}\ncost_of_path: {}\nnodes_expanded: {}\nsearch_depth: {}\nmax_search_depth: {}\nrunning_time: {}\nmax_Ram_usage:{}".format(path_to_goal, c, n, search_depth, m, round(r, 8), round(s, 8)))
     
     
     f.close()
