@@ -211,7 +211,7 @@ def writeOutput(initial_state, final_state, n, m, c, r, s):
         current = current.parent
         search_depth += 1
     
-    f.write("path_to_goal: {}\ncost_of_path: {}\nnodes_expanded: {}\nsearch_depth: {}\nmax_search_depth: {}\nrunning_time: {}\n {}".format(path_to_goal, c, n, search_depth, m, round(r, 8), s))
+    f.write("path_to_goal: {}\ncost_of_path: {}\nnodes_expanded: {}\nsearch_depth: {}\nmax_search_depth: {}\nrunning_time: {}\nmax_Ram_usage:{}".format(path_to_goal, c, n, search_depth, m, round(r, 8), s))
     
     
     f.close()
@@ -266,6 +266,7 @@ def dfs_search(initial_state):
     n = 0 #nodes_expanded
     m = 0
     s  = time.time()
+    s_m = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     while (frontier.isEmpty() == 0):
         state = frontier.pop()
         if (state.cost > m):
@@ -275,7 +276,8 @@ def dfs_search(initial_state):
         
         if test_goal(state):
             r = time.time() - s
-            writeOutput(initial_state, state, n, m, state.cost, r)
+            sp = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss - s_m
+            writeOutput(initial_state, state, n, m, state.cost, r, sp)
             return 1
         
         neighbors = state.expand()
@@ -298,6 +300,7 @@ def A_star_search(initial_state):
     n=0 #nodes_expanded
     m = 0
     s  = time.time()
+    s_m = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     while (frontier.isEmpty() == 0):
         state = frontier.deleteMin()
         #print(state.config)
@@ -308,7 +311,8 @@ def A_star_search(initial_state):
         
         if test_goal(state):
             r = time.time() - s
-            writeOutput(initial_state, state, len(explored), m, state.cost, r)
+            sp = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss - s_m
+            writeOutput(initial_state, state, len(explored), m, state.cost, r, sp)
             return 1
         
         neighbors = state.expand()
